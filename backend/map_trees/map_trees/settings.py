@@ -150,4 +150,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Allowed cors
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
+    'https://tree-vinnytsia.herokuapp.com',
 ]

@@ -19,6 +19,14 @@ class Tree(models.Model):
         (Status.perfect, 'Perfect'),
     )
 
+    COLOR_DICT = {
+        Status.awful: '#ff0000',
+        Status.bad: '#e67e22',
+        Status.care_required: '#f1c40f',
+        Status.good: '#2ecc71',
+        Status.perfect: '#009432'
+    }
+
     radius = models.FloatField(
         verbose_name='radius'
     )
@@ -59,6 +67,10 @@ class Tree(models.Model):
         max_length=1000,
         blank=True, null=True
     )
+
+    @property
+    def color(self):
+        return self.COLOR_DICT[self.condition]
 
     class Meta:
         verbose_name = 'Tree'

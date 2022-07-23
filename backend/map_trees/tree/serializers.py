@@ -4,9 +4,10 @@ from tree.models import Tree, TreeWorkPlan
 
 
 class TreeListSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = Tree
-        fields = ['id', 'latitude', 'longitude', 'radius', 'condition', ]
+        fields = ['id', 'latitude', 'longitude', 'radius', 'condition', 'color', ]
 
 
 class TreeWorkPlanSerializer(serializers.ModelSerializer):
