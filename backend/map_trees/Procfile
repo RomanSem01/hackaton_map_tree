@@ -1,0 +1,2 @@
+release: python manage.py migrate
+web: gunicorn map_trees.wsgi --log-file -
