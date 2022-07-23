@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'django_filters',
     'corsheaders',
     'tree',
 ]
@@ -121,6 +122,13 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': (
+        'django_filters.rest_framework.DjangoFilterBackend',
+    ),
+}
 
 
 # Static files (CSS, JavaScript, Images)

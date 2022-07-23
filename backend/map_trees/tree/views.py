@@ -1,5 +1,6 @@
 from rest_framework import generics
 from rest_framework.permissions import AllowAny
+from django_filters import rest_framework as filters
 from django.shortcuts import get_object_or_404
 
 from tree.models import Tree, TreeWorkPlan
@@ -10,6 +11,9 @@ class TreeListCreateView(generics.ListCreateAPIView):
     permission_classes = (
         AllowAny,
     )
+
+    filter_backends = (filters.DjangoFilterBackend,)
+    filterset_fields = ('condition',)
 
     def get_serializer_class(self):
         if self.request.method == 'POST':
