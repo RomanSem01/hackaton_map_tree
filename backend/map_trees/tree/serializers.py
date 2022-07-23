@@ -1,4 +1,3 @@
-from numpy import source
 from rest_framework import serializers
 
 from tree.models import Tree, TreeWorkPlan
@@ -13,7 +12,12 @@ class TreeListSerializer(serializers.ModelSerializer):
 class TreeWorkPlanSerializer(serializers.ModelSerializer):
     class Meta:
         model = TreeWorkPlan
-        fields = ['id', 'plan']
+        fields = ['id', 'plan', 'is_done']
+
+    def update(self, instance, validated_data):
+        instance.update(**validated_data)
+        return instance
+
 
 class TreeDetailSerializer(serializers.ModelSerializer):
     tree_work_plans = TreeWorkPlanSerializer(allow_null=True, required=False, many=True)

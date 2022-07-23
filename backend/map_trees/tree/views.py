@@ -2,8 +2,8 @@ from rest_framework import generics
 from rest_framework.permissions import AllowAny
 from django.shortcuts import get_object_or_404
 
-from tree.models import Tree
-from tree.serializers import TreeListSerializer, TreeDetailSerializer
+from tree.models import Tree, TreeWorkPlan
+from tree.serializers import TreeListSerializer, TreeDetailSerializer, TreeWorkPlanSerializer
 
 
 class TreeListCreateView(generics.ListCreateAPIView):
@@ -28,3 +28,13 @@ class TreeDetailView(generics.RetrieveAPIView):
 
     def get_object(self):
         return get_object_or_404(Tree, pk=self.kwargs.get('tree_id'))
+
+
+class PlanDetailView(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = (
+        AllowAny,
+    )
+    serializer_class = TreeWorkPlanSerializer
+
+    def get_object(self):
+        return get_object_or_404(TreeWorkPlan, pk=self.kwargs.get('plan_id'))
