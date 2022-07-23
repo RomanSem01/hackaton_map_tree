@@ -51,3 +51,7 @@ class Tree(models.Model):
     longitude = models.FloatField(
         verbose_name='longitude'
     )
+
+    class Meta:
+        verbose_name = 'Tree'
+        verbose_name_plural = 'Trees'
