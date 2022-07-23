@@ -20,7 +20,7 @@ class TreeListCreateView(generics.ListCreateAPIView):
         return Tree.objects.all()
 
 
-class TreeDetailView(generics.RetrieveAPIView):
+class TreeDetailView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (
         AllowAny,
     )
