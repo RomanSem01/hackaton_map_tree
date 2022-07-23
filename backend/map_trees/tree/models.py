@@ -1,3 +1,5 @@
+import ssl
+from geopy.geocoders import Nominatim
 from django.db import models
 
 
@@ -52,9 +54,21 @@ class Tree(models.Model):
         verbose_name='longitude'
     )
 
+    location = models.CharField(
+        verbose_name='location',
+        max_length=128,
+        blank=True, null=True
+    )
+
     class Meta:
         verbose_name = 'Tree'
         verbose_name_plural = 'Trees'
+    
+    def save(self, *args, **kwargs):
+        ssl._create_default_https_context = ssl._create_unverified_context
+        geolocator =  Nominatim(user_agent='trees')
+        self.location = geolocator.reverse(f'{self.latitude}, {self.longitude}', language='en').address
+        super().save(*args, **kwargs)
 
 
 class TreeWorkPlan(models.Model):
