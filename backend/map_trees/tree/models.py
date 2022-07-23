@@ -55,3 +55,21 @@ class Tree(models.Model):
     class Meta:
         verbose_name = 'Tree'
         verbose_name_plural = 'Trees'
+
+
+class TreeWorkPlan(models.Model):
+    tree = models.ForeignKey(
+        verbose_name='tree',
+        to='tree.Tree',
+        related_name='tree_work_plans',
+        on_delete=models.CASCADE
+    )
+
+    plan = models.CharField(
+        verbose_name='plan',
+        max_length=1024
+    )
+
+    class Meta:
+        verbose_name = 'Tree work plan'
+        verbose_name_plural = 'Tree work plans'
