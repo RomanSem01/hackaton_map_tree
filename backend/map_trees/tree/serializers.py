@@ -21,4 +21,5 @@ class TreeDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tree
         fields = ['id', 'latitude', 'longitude', 'radius', 'age', 
-                 'family', 'condition', 'image', 'tree_work_plans']
+                 'family', 'condition', 'image', 'location', 'tree_work_plans']
+        read_only_fields = ['location', ]

@@ -56,7 +56,7 @@ class Tree(models.Model):
 
     location = models.CharField(
         verbose_name='location',
-        max_length=128,
+        max_length=1000,
         blank=True, null=True
     )
 
