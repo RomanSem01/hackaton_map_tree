@@ -6,7 +6,7 @@ from tree.models import Tree, TreeWorkPlan
 class TreeListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tree
-        fields = ['id', 'latitude', 'longitude', 'radius']
+        fields = ['id', 'latitude', 'longitude', 'radius', 'condition', ]
 
 
 class TreeWorkPlanSerializer(serializers.ModelSerializer):
