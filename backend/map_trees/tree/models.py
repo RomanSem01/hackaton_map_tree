@@ -70,6 +70,11 @@ class TreeWorkPlan(models.Model):
         max_length=1024
     )
 
+    is_done = models.BooleanField(
+        verbose_name='is done',
+        default=False
+    )
+
     class Meta:
         verbose_name = 'Tree work plan'
         verbose_name_plural = 'Tree work plans'
