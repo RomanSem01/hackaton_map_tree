@@ -26,6 +26,14 @@ class TreeDetailView(generics.RetrieveUpdateDestroyAPIView):
 
     def get_object(self):
         return get_object_or_404(Tree, pk=self.kwargs.get('tree_id'))
+    
+
+class PlanCreateView(generics.CreateAPIView):
+    permission_classes = (
+        AllowAny,
+    )
+    serializer_class = TreeWorkPlanSerializer
+    queryset = TreeWorkPlan.objects.all()
 
 
 class PlanDetailView(generics.RetrieveUpdateDestroyAPIView):
