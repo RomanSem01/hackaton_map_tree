@@ -3,8 +3,8 @@ from rest_framework.permissions import AllowAny
 from django_filters import rest_framework as filters
 from django.shortcuts import get_object_or_404
 
-from tree.models import Tree, TreeWorkPlan
-from tree.serializers import TreeListSerializer, TreeDetailSerializer, TreeWorkPlanSerializer
+from tree.serializers import TreeSerializer, TreeWorkPlanSerializer
+from tree.models import Tree
 
 
 class TreeListCreateView(generics.ListCreateAPIView):
@@ -14,21 +14,15 @@ class TreeListCreateView(generics.ListCreateAPIView):
 
     filter_backends = (filters.DjangoFilterBackend,)
     filterset_fields = ('condition',)
-
-    def get_serializer_class(self):
-        if self.request.method == 'POST':
-            return TreeDetailSerializer
-        return TreeListSerializer
-    
-    def get_queryset(self):
-        return Tree.objects.all()
+    serializer_class = TreeSerializer
+    queryset = Tree.objects.all()
 
 
 class TreeDetailView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (
         AllowAny,
     )
-    serializer_class = TreeDetailSerializer
+    serializer_class = TreeSerializer
 
     def get_object(self):
         return get_object_or_404(Tree, pk=self.kwargs.get('tree_id'))
