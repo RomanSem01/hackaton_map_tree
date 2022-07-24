@@ -71,6 +71,10 @@ export const Button = styled.button`
   outline: 0;
   transition: all 0.25s ease;
 
+  & svg {
+    color: ${themes.colors.secondary};
+  }
+
   &.open {
     transform: rotate(0deg);
     top: 0%;
