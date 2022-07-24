@@ -35,6 +35,11 @@ class TreeWorkPlanCreateView(generics.CreateAPIView):
     serializer_class = TreeWorkPlanSerializer
     queryset = TreeWorkPlan.objects.all()
 
+    def get_serializer_context(self):
+        context = super().get_serializer_context()
+        context['tree_id'] = self.kwargs.get('tree_id')
+        return context
+
 
 class TreeWorkPlanDetailView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (
