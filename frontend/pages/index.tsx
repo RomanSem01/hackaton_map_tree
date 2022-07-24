@@ -8,6 +8,7 @@ import { homeService } from '../service/home.service';
 import { queryKeys } from '../constants/query-keys.constants';
 import HomeForm from '../components/HomeForm';
 import SidebarForm from '../components/SidebarForm';
+import Head from 'next/head';
 
 const Home: NextPage = () => {
   const { data, refetch } = useQuery([`${queryKeys.getAllTrees}`], () =>
@@ -94,13 +95,40 @@ const Home: NextPage = () => {
   });
 
   return (
-    <Styled.HomeWrapper>
-      <>
-        <Styled.MapsWrapper ref={googlemap} />
-        <HomeForm refetch={refetch} />
-        {data && <SidebarForm data={data} refetch={refetch} />}
-      </>
-    </Styled.HomeWrapper>
+    <>
+      <Head>
+        <title>Vinnytsia Tree Map</title>
+        <meta name="description" content="Vinnytsia Tree Map" />
+        <link
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href="/apple-touch-icon.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href="/favicon-32x32.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="16x16"
+          href="/favicon-16x16.png"
+        />
+        <link rel="manifest" href="/site.webmanifest" />
+        <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+        <meta name="msapplication-TileColor" content="#da532c" />
+        <meta name="theme-color" content="#ffffff"></meta>
+      </Head>
+      <Styled.HomeWrapper>
+        <>
+          <Styled.MapsWrapper ref={googlemap} />
+          <HomeForm refetch={refetch} />
+          {data && <SidebarForm data={data} refetch={refetch} />}
+        </>
+      </Styled.HomeWrapper>
+    </>
   );
 };
 

@@ -1,5 +1,5 @@
 ﻿import { useMutation } from '@tanstack/react-query';
-import { FormikProps, FormikValues } from 'formik';
+import { FormikHelpers, FormikProps, FormikValues } from 'formik';
 import React, { useRef } from 'react';
 import {
   homeFormInitialValues,
@@ -23,7 +23,10 @@ const HomeForm = ({ refetch }: IHomeForm) => {
       },
     },
   );
-  const submitFunc = (values: FormikValues) => {
+  const submitFunc = (
+    values: FormikValues,
+    { resetForm }: FormikHelpers<FormikValues>,
+  ) => {
     if (values.condition === '') {
       values.condition = 'good';
     }
@@ -42,15 +45,20 @@ const HomeForm = ({ refetch }: IHomeForm) => {
         formdata.append('condition', condition);
         formdata.append('age', age);
         formdata.append('family', family);
-
         mutateAsync(formdata);
+        resetForm();
+        values.image = '';
       }
     }
   };
   return (
     <Styled.FormWrapper>
       <Styled.Form initialValues={homeFormInitialValues} onSubmit={submitFunc}>
-        {({ handleChange, handleSubmit }: FormikProps<FormikValues>) => {
+        {({
+          handleChange,
+          handleSubmit,
+          values,
+        }: FormikProps<FormikValues>) => {
           return (
             <>
               <Styled.FormHeader>Add Tree</Styled.FormHeader>
@@ -60,7 +68,7 @@ const HomeForm = ({ refetch }: IHomeForm) => {
                 options={homeSelectOptions}
               />
               {InputsForm.map(
-                ({ name, type, step, placeholder, value, label }, idx) => (
+                ({ name, type, step, placeholder, label }, idx) => (
                   <Styled.FormBox key={idx}>
                     <Styled.FormField
                       className="form__input"
@@ -69,7 +77,7 @@ const HomeForm = ({ refetch }: IHomeForm) => {
                       type={type}
                       onChange={handleChange}
                       step={step}
-                      value={value}
+                      value={values[name]}
                     />
                     <Styled.FormLabel htmlFor="" className="form__label">
                       {label}
@@ -83,6 +91,7 @@ const HomeForm = ({ refetch }: IHomeForm) => {
                   name="image"
                   ref={inputRef}
                   type="file"
+                  value={values.image}
                   onChange={handleChange}
                 />
               </Styled.FormBox>
