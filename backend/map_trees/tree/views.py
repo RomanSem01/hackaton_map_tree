@@ -28,7 +28,7 @@ class TreeDetailView(generics.RetrieveUpdateDestroyAPIView):
         return get_object_or_404(Tree, pk=self.kwargs.get('tree_id'))
     
 
-class PlanCreateView(generics.CreateAPIView):
+class TreeWorkPlanCreateView(generics.CreateAPIView):
     permission_classes = (
         AllowAny,
     )
@@ -36,7 +36,7 @@ class PlanCreateView(generics.CreateAPIView):
     queryset = TreeWorkPlan.objects.all()
 
 
-class PlanDetailView(generics.RetrieveUpdateDestroyAPIView):
+class TreeWorkPlanDetailView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (
         AllowAny,
     )
