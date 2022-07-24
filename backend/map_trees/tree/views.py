@@ -4,7 +4,7 @@ from django_filters import rest_framework as filters
 from django.shortcuts import get_object_or_404
 
 from tree.serializers import TreeSerializer, TreeWorkPlanSerializer
-from tree.models import Tree
+from tree.models import Tree, TreeWorkPlan
 
 
 class TreeListCreateView(generics.ListCreateAPIView):
